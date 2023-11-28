@@ -20,11 +20,38 @@ export class AppComponent implements OnInit{
       }),
       'gender': new FormControl('male'),
       'hobbies': new FormArray([])
-    })
+    });
+    this.signupForm.statusChanges.subscribe(
+      (value) => {
+        console.log(value)
+      }
+    );
+    this.signupForm.setValue({
+      'userData': {
+        'username': 'Max',
+        'email': 'Maciek@test.com'
+      },
+      'gender': 'male',
+      'hobbies': []
+    });
+    this.signupForm.patchValue({
+      'userData': {
+        'username': 'Anna',
+        'email': 'Maciek@test.com'
+      },
+      'gender': 'male',
+      'hobbies': []
+    });
+    // this.signupForm.valueChanges.subscribe(
+    //   (value) => {
+    //     console.log(value)
+    //   }
+    // );
   }
 
   onSubmit() {
     console.log(this.signupForm);
+    this.signupForm.reset({'gender': 'male', 'userData': {'username': 'po submicie'}}); // wartości jakie mają pozostać po submicie
   }
 
   onAddHobby() {
